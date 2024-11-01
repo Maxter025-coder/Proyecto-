@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lista de Empleados</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Archivo CSS personalizado -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body style="background-color: #f8f9fa;">
+    <div class="container">
+        <h1 class="my-4 text-center">Gestión de Empleados</h1>
+        
+        <!-- Botón para agregar empleado -->
+        <div class="text-right my-3">
+            <a href="{{ url_for('agregar_empleado') }}" class="btn btn-success">Agregar Empleado</a>
+        </div>
+
+        <!-- Tabla de empleados -->
+        <table class="table table-bordered table-striped">
+            <thead class="thead-dark">
+                <tr>
+                    <th>Nombre</th>
+                    <th>Dirección</th>
+                    <th>Puesto</th>
+                    <th>Salario</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for empleado in empleados %}
+                <tr>
+                    <td>{{ empleado.nombre }}</td>
+                    <td>{{ empleado.direccion }}</td>
+                    <td>{{ empleado.puesto }}</td>
+                    <td>${{ empleado.salario }}</td>
+                    <td>
+                        <a href="{{ url_for('editar_empleado', id_empleado=empleado.id_empleado) }}" class="btn btn-primary btn-sm">Editar</a>
+                        <form action="{{ url_for('eliminar_empleado', id_empleado=empleado.id_empleado) }}" method="POST" style="display: inline;">
+                            <button type="submit" class="btn btn-danger btn-sm">Eliminar</button>
+                        </form>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>
+
+
+
+
+

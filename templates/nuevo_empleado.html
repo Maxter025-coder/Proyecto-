@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Agregar Empleado</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <h1 class="my-4 text-center">Agregar Nuevo Empleado</h1>
+        <form action="/empleado/nuevo" method="POST">
+            <div class="form-group">
+                <label for="nombre">Nombre</label>
+                <input type="text" class="form-control" id="nombre" name="nombre" required>
+            </div>
+            <div class="form-group">
+                <label for="direccion">Dirección</label>
+                <input type="text" class="form-control" id="direccion" name="direccion" required>
+            </div>
+            <div class="form-group">
+                <label for="puesto_id">Puesto</label>
+                <select class="form-control" id="puesto_id" name="puesto_id" required>
+                    {% for puesto in puestos %}
+                    <option value="{{ puesto.id_puesto }}">{{ puesto.nombre }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="salario">Salario</label>
+                <input type="number" step="0.01" class="form-control" id="salario" name="salario" required>
+            </div>
+            <button type="submit" class="btn btn-primary">Agregar Empleado</button>
+            <a href="/empleados" class="btn btn-secondary">Cancelar</a>
+        </form>
+    </div>
+</body>
+</html>
+
